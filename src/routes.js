@@ -1,40 +1,36 @@
+const {
+  addBookHandler,
+  getAllBooksHandler,
+  getBookByIdHandler,
+  editBookByIdHandler,
+  deleteBookByIdHandler,
+} = require('./handler');
+
 const routes = [
   {
-    method: 'GET',
-    path: '/',
-    handler: (_request, _h) => 'Homepage',
-  },
-  {
-    method: '*',
-    path: '/',
-    handler: (_request, _h) => 'Halaman tidak dapat diakses dengan method tersebut',
+    method: 'POST',
+    path: '/books',
+    handler: addBookHandler,
   },
   {
     method: 'GET',
-    path: '/about',
-    handler: (_request, _h) => 'About Page',
-  },
-  {
-    method: '*',
-    path: '/about',
-    handler: (_request, _h) => 'Halaman tidak dapat diakses dengan method tersebut',
+    path: '/books',
+    handler: getAllBooksHandler,
   },
   {
     method: 'GET',
-    path: '/hello/{name?}',
-    handler: (request, _h) => {
-      const { name = 'stranger' } = request.params;
-      const { lang } = request.query;
-      if (lang === 'id') {
-        return `Hai, ${name}!`;
-      }
-      return `Hello, ${name}`;
-    },
+    path: '/books/{bookId}',
+    handler: getBookByIdHandler,
   },
   {
-    method: '*',
-    path: '/{any*}',
-    handler: (_request, _h) => 'Halaman tidak ditemukan',
+    method: 'PUT',
+    path: '/books/{bookId}',
+    handler: editBookByIdHandler,
+  },
+  {
+    method: 'DELETE',
+    path: '/books/{bookId}',
+    handler: deleteBookByIdHandler,
   },
 ];
 
